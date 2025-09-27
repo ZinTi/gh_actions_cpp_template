@@ -178,9 +178,9 @@ jobs:
         shell: bash
         run: |
           if [ "$RUNNER_OS" == "Linux" ]; then
-            tar -Jcvf ${{ steps.strings.outputs.workspace_dir }}/${{ github.event.inputs.library }}-v${{ steps.setver.outputs.version }}-${{ steps.setver.outputs.short_os }}-${{ steps.setver.outputs.arch }}-${{ steps.setver.outputs.toolchain }}.tar.xz ${{ steps.strings.outputs.release-dir }}
+            tar -Jcvf ${{ steps.strings.outputs.workspace-dir }}/${{ github.event.inputs.library }}-v${{ steps.setver.outputs.version }}-${{ steps.setver.outputs.short_os }}-${{ steps.setver.outputs.arch }}-${{ steps.setver.outputs.toolchain }}.tar.xz ${{ steps.strings.outputs.release-dir }}
           elif [ "$RUNNER_OS" == "Windows" ]; then
-            7z a ${{ steps.strings.outputs.workspace_dir }}/${{ github.event.inputs.library }}-v${{ steps.setver.outputs.version }}-${{ steps.setver.outputs.short_os }}-${{ steps.setver.outputs.arch }}-${{ steps.setver.outputs.toolchain }}.7z ${{ steps.strings.outputs.release-dir }}
+            7z a ${{ steps.strings.outputs.workspace-dir }}/${{ github.event.inputs.library }}-v${{ steps.setver.outputs.version }}-${{ steps.setver.outputs.short_os }}-${{ steps.setver.outputs.arch }}-${{ steps.setver.outputs.toolchain }}.7z ${{ steps.strings.outputs.release-dir }}
           fi
 
       - name: Upload artifacts
@@ -188,6 +188,6 @@ jobs:
         with:
           name: release-pkgs-${{ matrix.os }}-${{ matrix.c_compiler }}-${{ steps.setver.outputs.version }}
           path: |
-            ${{ steps.strings.outputs.workspace_dir }}/*.tar.xz
-            ${{ steps.strings.outputs.workspace_dir }}/*.7z
+            ${{ steps.strings.outputs.workspace-dir }}/*.tar.xz
+            ${{ steps.strings.outputs.workspace-dir }}/*.7z
 
